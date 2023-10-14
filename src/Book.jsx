@@ -2,7 +2,7 @@ import { useState} from "react";
 
 export default function Book({ book }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const {image, title, author, category, pages, summary} = book
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -14,16 +14,16 @@ export default function Book({ book }) {
     return (
         <div className="rounded overflow-hidden shadow-md">
             <img
-                src={book.image}
-                alt={book.title}
+                src={image}
+                alt={title}
                 className="w-full h-2/3 cursor-pointer"
                 onClick={openModal}
             />
             <div className="px-6 py-4">
                 <div className="font-bold text-xl mb-2 cursor-pointer" onClick={openModal}>
-                    {book.title}
+                    {title}
                 </div>
-                <p className="text-gray-700 text-base">{book.author}</p>
+                <p className="text-gray-700 text-base">{author}</p>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
                     Agregar al carrito
                 </button>
@@ -36,15 +36,15 @@ export default function Book({ book }) {
                         {/* Contenido del modal */}
                         <div className="bg-white rounded shadow-lg">
                             <div className="relative p-6 flex-auto">
-                                <h3 className="text-xl font-semibold">{book.title}</h3>
-                                <p className="text-gray-600 mb-4">{book.author}</p>
+                                <h3 className="text-xl font-semibold">{title}</h3>
+                                <p className="text-gray-600 mb-4">{author}</p>
                                 <p className="text-gray-700 mb-4">
-                                    Categoría: {book.category}
+                                    Categoría: {category}
                                 </p>
                                 <p className="text-gray-700 mb-4">
-                                    Número de páginas: {book.pages}
+                                    Número de páginas: {pages}
                                 </p>
-                                <p className="text-gray-700">{book.summary}</p>
+                                <p className="text-gray-700">{summary}</p>
                             </div>
                             <div className="p-6 flex justify-end">
                                 <button
