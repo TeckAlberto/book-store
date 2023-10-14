@@ -3,7 +3,7 @@ import Book from "./Book.jsx";
 export default  function Books() {
     const books = [
         {
-            title: "Mi Libro",
+            title: "El principito",
             author: "Autor del Libro",
             category: "Ficción",
             pages: 250,
@@ -11,7 +11,7 @@ export default  function Books() {
             image: "../public/img/img.png",
         },
         {
-            title: "Mi Libro",
+            title: "Harry Potter",
             author: "Autor del Libro",
             category: "Ficción",
             pages: 250,
@@ -19,7 +19,7 @@ export default  function Books() {
             image: "../public/img/img.png",
         },
         {
-            title: "Mi Libro",
+            title: "Los juegos del hambre",
             author: "Autor del Libro",
             category: "Ficción",
             pages: 250,
@@ -27,7 +27,7 @@ export default  function Books() {
             image: "../public/img/img.png",
         },
         {
-            title: "Mi Libro",
+            title: "Davidd goggins biografia",
             author: "Autor del Libro",
             category: "Ficción",
             pages: 250,
@@ -35,7 +35,7 @@ export default  function Books() {
             image: "../public/img/img.png",
         },
         {
-            title: "Mi Libro",
+            title: "50 sombres de grey",
             author: "Autor del Libro",
             category: "Ficción",
             pages: 250,
@@ -43,7 +43,7 @@ export default  function Books() {
             image: "../public/img/img.png",
         },
         {
-            title: "Mi Libro",
+            title: "El señor de los anillos",
             author: "Autor del Libro",
             category: "Ficción",
             pages: 250,
