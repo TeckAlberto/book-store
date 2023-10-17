@@ -2,7 +2,6 @@ import { useState} from "react";
 
 export default function Book({ book }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const {image, title, author, category, pages, summary} = book
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -44,7 +43,7 @@ export default function Book({ book }) {
                                 <p className="mb-4 text-gray-700">
                                     Número de páginas: {book.pages}
                                 </p>
-                                <p className="text-gray-700">{summary}</p>
+                                <p className="text-gray-700">{book.summary}</p>
                             </div>
                             <div className="flex justify-end p-6">
                                 <button
