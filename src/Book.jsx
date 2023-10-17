@@ -2,7 +2,7 @@ import { useState} from "react";
 
 export default function Book({ book }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-
+    const {image, title, author, category, pages, summary} = book
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -16,7 +16,7 @@ export default function Book({ book }) {
             <img
                 src={book.image}
                 alt={book.title}
-                className="w-full mx-auto rounded-md cursor-pointer"
+                className="w-full cursor-pointer h-2/3"
                 onClick={openModal}
             />
             <div className="px-6 py-4">
@@ -24,7 +24,7 @@ export default function Book({ book }) {
                     {book.title}
                 </div>
                 <p className="text-base text-gray-700">{book.author}</p>
-                <button className="px-4 py-2 mt-2 text-sm font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
+                <button className="px-4 py-2 mt-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                     Agregar al carrito
                 </button>
             </div>
@@ -44,7 +44,7 @@ export default function Book({ book }) {
                                 <p className="mb-4 text-gray-700">
                                     Número de páginas: {book.pages}
                                 </p>
-                                <p className="text-gray-700">{book.summary}</p>
+                                <p className="text-gray-700">{summary}</p>
                             </div>
                             <div className="flex justify-end p-6">
                                 <button
