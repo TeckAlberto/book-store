@@ -1,47 +1,92 @@
 import { useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useLocation } from "react-router-dom";
 import SearchAside from "./SearchAside.jsx";
 
 export default function Layout() {
-    const [ isOpen, setIsOpen ] = useState(false)
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+    const location = useLocation() // Reemplaza esto con tu lógica de autenticación real
+    const cartItemCount = 5; // Reemplaza esto con el número real de productos en el carrito
 
     return (
-        <div className="grid grid-cols-8 grid-rows-6 gap-3 h-screen">
+        <div className="flex flex-col h-screen">
             {/* Encabezado */}
-            <header className="col-span-full row-start-1 row-end-2 p-3 shadow-xl h-32 bg-gradient-to-r from-blue-500 to-purple-500 text-white">
-                <div className="flex justify-between items-center mb-3">
+            <header className="h-32 p-3 text-white shadow-xl bg-gradient-to-r from-blue-500 to-purple-500">
+                <div className="flex items-center justify-between mb-3">
                     <Link to={"/"} className="text-2xl font-semibold">
                         E<span className="font-normal">books</span>
                     </Link>
 
-                    {isOpen ? (
+                    {isUserLoggedIn ? (
                         <div className="flex space-x-4">
-                            <button onClick={() => setIsOpen(false) } className="text-white hover:underline">
-                                Sign In
+
+                            <p className="text-lg font-semibold">
+                                <span className="font-normal">Bienvenido: </span>Jesus Alberto
+                            </p>
+
+                            <button onClick={() => setIsUserLoggedIn(false)} className="text-white hover:underline">
+                                Sign Out
                             </button>
-                            <button  className="text-white hover:underline">
-                                Sign Up
-                            </button>
+
+
+                            <div className="relative">
+
+                                <Link to="/cart" className="text-white hover:underline">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="w-10 h-7"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M9 19a2 2 0 01-2 2 2 2 0 01-2-2"
+                                        />
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M9 19a2 2 0 012-2h2a2 2 0 012 2"
+                                        />
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M13 10V3M4 8l-1 9h18l-1-9"
+                                        />
+                                    </svg>
+                                    <span className="absolute p-1 text-white bg-red-600 rounded-full -top-2 -right-2">
+                                        {cartItemCount}
+                                    </span>
+                                </Link>
+                            </div>
+                            
                         </div>
                     ) : (
-                        <div className="flex space-x-4 items-center">
-                            <p className="text-lg font-semibold">Jesus Alberto</p>
-                            <button onClick={() => setIsOpen(true)} className="text-white hover:underline">
-                                Close Session
+                        <div className="flex items-center space-x-4">
+                            
+                            <button onClick={() => setIsUserLoggedIn(true)} className="font-bold text-white hover:underline">
+                                Sign In
+                            </button>
+
+                            <button onClick={() => setIsUserLoggedIn(true)} className="font-bold text-white hover:underline">
+                                Sign Up
                             </button>
                         </div>
                     )}
                 </div>
 
-                <nav className="flex space-x-4 text-sm">
-                    <Link to="/dashboard" className="text-white hover:underline">
+                <nav className="flex space-x-4 text-md">
+                    <Link to="/" className="text-white hover:underline">
                         Dashboard
                     </Link>
-                    <Link to="/library" className="text-white hover:underline">
-                        Library
+                    <Link to="/books" className="text-white hover:underline">
+                        Books
                     </Link>
-                    <Link to="/profile" className="text-white hover:underline">
-                        Profile
+                    <Link to="/orders" className="text-white hover:underline">
+                        Orders
                     </Link>
                     <Link to="/settings" className="text-white hover:underline">
                         Settings
@@ -49,9 +94,15 @@ export default function Layout() {
                 </nav>
             </header>
 
-            <SearchAside />
+            <div className="flex gap-10 p-2">
+                { location.pathname ==='/books' ? 
+                    <SearchAside /> : 
+                    null
 
-            <Outlet />
+                }
+
+                <Outlet/>
+            </div>
         </div>
     );
 }

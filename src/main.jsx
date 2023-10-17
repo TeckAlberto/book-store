@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom/client'
 import Layout from "./Layout";
 import './index.css'
 import Books from "./Books.jsx";
+import { ApplicationProvider } from './context/ApplicationProvider';
+import Dashboard from './Dashboard';
+import Orders from './Orders';
 
 const router = createBrowserRouter([
     {
@@ -11,8 +14,16 @@ const router = createBrowserRouter([
         element: <Layout/>,
         children: [
             {
+                index: true,
+                element: <Dashboard/>
+            },
+            {
                 path: "books",
                 element: <Books/>
+            },
+            {
+                path: "orders",
+                element: <Orders/>
             }
         ]
     },
@@ -25,6 +36,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <ApplicationProvider>
+        <RouterProvider router={router}/>
+    </ApplicationProvider>
   </React.StrictMode>,
 )

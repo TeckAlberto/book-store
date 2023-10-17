@@ -1,5 +1,7 @@
-
+import useApplication from "./hooks/useApplication.jsx";
 export default function SearchAside() {
+
+    const {handleCurrentCategory} = useApplication()
 
     const movieCategories = [
         "Acción",
@@ -24,9 +26,11 @@ export default function SearchAside() {
         "Documentales"
     ]
 
+
+
     return (
-        <aside className="col-start-1 col-end-3 row-start-2 row-end-4 rounded-lg shadow-sm bg-gray-200 p-4">
-            <h2 className="text-lg font-semibold mb-4">Search Books</h2>
+        <aside className="w-1/5 p-4 bg-gray-200 rounded-lg shadow-sm h-80">
+            <h2 className="mb-4 text-lg font-semibold">Search</h2>
 
             {/* Barra de búsqueda */}
             <div className="mb-4">
@@ -40,8 +44,11 @@ export default function SearchAside() {
             {/* Filtro por Categoría */}
             <div className="mb-4">
                 <label className="block text-sm font-medium">Categories</label>
-                <select className="w-full px-3 py-2 border rounded-md">
-                    <option value={"mx-auto"}  >--Select an option--</option>
+                <select 
+                    className="w-full px-3 py-2 border rounded-md"
+                    onChange={(e) => handleCurrentCategory(e.target.value)}
+                >
+                    <option value={""}>--Select an option--</option>
                     {movieCategories.map( (categorie, index) => (
                         <option key={index} value={categorie}>{categorie}</option>
                     ) )}

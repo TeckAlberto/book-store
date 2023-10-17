@@ -12,19 +12,19 @@ export default function Book({ book }) {
     };
 
     return (
-        <div className="rounded overflow-hidden shadow-md">
+        <main className="w-1/3 rounded-md shadow-md md:w-1/5">
             <img
                 src={book.image}
                 alt={book.title}
-                className="w-full h-2/3 cursor-pointer"
+                className="w-full mx-auto rounded-md cursor-pointer"
                 onClick={openModal}
             />
             <div className="px-6 py-4">
-                <div className="font-bold text-xl mb-2 cursor-pointer" onClick={openModal}>
+                <div className="mb-2 text-xl font-bold cursor-pointer" onClick={openModal}>
                     {book.title}
                 </div>
-                <p className="text-gray-700 text-base">{book.author}</p>
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2">
+                <p className="text-base text-gray-700">{book.author}</p>
+                <button className="px-4 py-2 mt-2 text-sm font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                     Agregar al carrito
                 </button>
             </div>
@@ -32,23 +32,23 @@ export default function Book({ book }) {
             {/* Modal */}
             {isModalOpen && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none">
-                    <div className="relative w-auto max-w-3xl mx-auto my-6">
+                    <div className="relative w-auto max-w-3xl mx-auto my-6 border-4 border-indigo-800">
                         {/* Contenido del modal */}
                         <div className="bg-white rounded shadow-lg">
-                            <div className="relative p-6 flex-auto">
+                            <div className="relative flex-auto p-6">
                                 <h3 className="text-xl font-semibold">{book.title}</h3>
-                                <p className="text-gray-600 mb-4">{book.author}</p>
-                                <p className="text-gray-700 mb-4">
+                                <p className="mb-4 text-gray-600">{book.author}</p>
+                                <p className="mb-4 text-gray-700">
                                     Categoría: {book.category}
                                 </p>
-                                <p className="text-gray-700 mb-4">
+                                <p className="mb-4 text-gray-700">
                                     Número de páginas: {book.pages}
                                 </p>
                                 <p className="text-gray-700">{book.summary}</p>
                             </div>
-                            <div className="p-6 flex justify-end">
+                            <div className="flex justify-end p-6">
                                 <button
-                                    className="text-blue-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    className="px-6 py-2 mb-1 mr-1 text-sm font-bold text-indigo-500 uppercase transition-all duration-150 ease-linear outline-none hover:text-indigo-800 background-transparent focus:outline-none"
                                     type="button"
                                     onClick={closeModal}
                                 >
@@ -59,6 +59,6 @@ export default function Book({ book }) {
                     </div>
                 </div>
             )}
-        </div>
+        </main>
     );
 }
