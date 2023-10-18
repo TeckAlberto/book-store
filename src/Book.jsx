@@ -11,7 +11,7 @@ export default function Book({ book }) {
     };
 
     return (
-        <main className="w-1/3 rounded-md shadow-md md:w-1/5">
+        <div className="w-1/3 rounded-md shadow-md md:w-1/5">
             <img
                 src={book.image}
                 alt={book.title}
@@ -58,6 +58,6 @@ export default function Book({ book }) {
                     </div>
                 </div>
             )}
-        </main>
+        </div>
     );
 }

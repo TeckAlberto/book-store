@@ -363,5 +363,7 @@ export const initialBooks = [
   ];
 
   export const getCategories = () => {
-
+    const uniqueCategories = new Set() 
+    initialBooks.forEach( book => uniqueCategories.add(book.category))
+    return Array.from(uniqueCategories)
   }

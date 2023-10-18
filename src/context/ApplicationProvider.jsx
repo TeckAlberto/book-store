@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { initialBooks } from "../data/books";
+import { getCategories, initialBooks } from "../data/books";
 
 const ApplicationContext = createContext()
 
@@ -9,7 +9,10 @@ const ApplicationProvider = ({children}) => {
     
     const [ books, setBooks ] = useState(initialBooks)
     const [ category, setCategory ] = useState('')
-    //const [ currentOrder, setCurrentOrder ] = useState([])
+    const [ currentOrder, setCurrentOrder ] = useState([])
+    const [ categories, setCategories ] = useState(getCategories())
+
+    //console.log(categories)
     //const [ orders, setOrders ] = useState([])
 
     const handleCurrentCategory = currentCategory => {
@@ -40,7 +43,11 @@ const ApplicationProvider = ({children}) => {
                 setBooks,
                 category,
                 setCategory,
-                handleCurrentCategory
+                handleCurrentCategory,
+                currentOrder,
+                setCurrentOrder,
+                categories,
+                setCategories
             }}
         >
             {children}

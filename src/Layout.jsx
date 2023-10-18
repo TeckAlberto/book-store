@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import SearchAside from "./SearchAside.jsx";
+import useApplication from "./hooks/useApplication.jsx";
+import { getCategories } from "./data/books.js";
 
 export default function Layout() {
+    const { currentOrder } = useApplication()
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
-    const location = useLocation() // Reemplaza esto con tu lógica de autenticación real
-    const cartItemCount = 5; // Reemplaza esto con el número real de productos en el carrito
+    const location = useLocation() 
+
+    getCategories()
 
     return (
         <div className="flex flex-col h-screen">
             {/* Encabezado */}
-            <header className="h-32 p-3 text-white shadow-xl bg-gradient-to-r from-blue-500 to-purple-500">
+            <header className="h-32 px-3 py-5 mb-5 text-white shadow-xl bg-gradient-to-r from-blue-500 to-purple-500">
                 <div className="flex items-center justify-between mb-3">
                     <Link to={"/"} className="text-2xl font-semibold">
                         E<span className="font-normal">books</span>
@@ -57,9 +61,12 @@ export default function Layout() {
                                             d="M13 10V3M4 8l-1 9h18l-1-9"
                                         />
                                     </svg>
-                                    <span className="absolute p-1 text-white bg-red-600 rounded-full -top-2 -right-2">
-                                        {cartItemCount}
-                                    </span>
+                                    { currentOrder.length > 0 ? 
+                                        <span className="absolute p-1 text-white bg-red-600 rounded-full -top-2 -right-2">
+                                            {currentOrder.length}
+                                        </span> :
+                                        null
+                                    }
                                 </Link>
                             </div>
                             
@@ -87,9 +94,6 @@ export default function Layout() {
                     </Link>
                     <Link to="/orders" className="text-white hover:underline">
                         Orders
-                    </Link>
-                    <Link to="/settings" className="text-white hover:underline">
-                        Settings
                     </Link>
                 </nav>
             </header>

@@ -1,30 +1,7 @@
 import useApplication from "./hooks/useApplication.jsx";
 export default function SearchAside() {
 
-    const {handleCurrentCategory} = useApplication()
-
-    const movieCategories = [
-        "Acción",
-        "Comedia",
-        "Drama",
-        "Ciencia ficción",
-        "Fantasía",
-        "Aventura",
-        "Terror",
-        "Animación",
-        "Romance",
-        "Misterio",
-        "Crimen",
-        "Superhéroes",
-        "Biografía",
-        "Históricas",
-        "Guerra",
-        "Western",
-        "Musical",
-        "Deportes",
-        "Familiares",
-        "Documentales"
-    ]
+    const {handleCurrentCategory, categories} = useApplication()
 
 
 
@@ -49,7 +26,7 @@ export default function SearchAside() {
                     onChange={(e) => handleCurrentCategory(e.target.value)}
                 >
                     <option value={""}>--Select an option--</option>
-                    {movieCategories.map( (categorie, index) => (
+                    {categories.map( (categorie, index) => (
                         <option key={index} value={categorie}>{categorie}</option>
                     ) )}
                     {/* Agrega más opciones de categoría según tus necesidades */}
