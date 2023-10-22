@@ -1,18 +1,14 @@
-import { useState } from "react";
+//import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
 import SearchAside from "./SearchAside.jsx";
 import useApplication from "./hooks/useApplication.jsx";
-import { getCategories } from "./data/books.js";
 
 export default function Layout() {
-    const { currentOrder } = useApplication()
-    const [isUserLoggedIn, setIsUserLoggedIn] = useState(true);
+    const { currentOrder, isLogged, setIsLogged } = useApplication()
     const location = useLocation() 
 
-    getCategories()
-
     return (
-        <div className="flex flex-col h-screen">
+        <div className="relative flex flex-col h-screen">
             {/* Encabezado */}
             <header className="h-32 px-3 py-5 mb-5 text-white shadow-xl bg-gradient-to-r from-blue-500 to-purple-500">
                 <div className="flex items-center justify-between mb-3">
@@ -20,19 +16,19 @@ export default function Layout() {
                         E<span className="font-normal">books</span>
                     </Link>
 
-                    {isUserLoggedIn ? (
+                    {isLogged ? (
                         <div className="flex space-x-4">
 
                             <p className="text-lg font-semibold">
                                 <span className="font-normal">Bienvenido: </span>Jesus Alberto
                             </p>
 
-                            <button onClick={() => setIsUserLoggedIn(false)} className="text-white hover:underline">
+                            <button onClick={() => setIsLogged(false)} className="text-white hover:underline">
                                 Sign Out
                             </button>
 
 
-                            <div className="relative">
+                            <div id="cart" className="relative">
 
                                 <Link to="/cart" className="text-white hover:underline">
                                     <svg
@@ -74,11 +70,11 @@ export default function Layout() {
                     ) : (
                         <div className="flex items-center space-x-4">
                             
-                            <button onClick={() => setIsUserLoggedIn(true)} className="font-bold text-white hover:underline">
+                            <button onClick={() => setIsLogged(true)} className="font-bold text-white hover:underline">
                                 Sign In
                             </button>
 
-                            <button onClick={() => setIsUserLoggedIn(true)} className="font-bold text-white hover:underline">
+                            <button onClick={() => setIsLogged(true)} className="font-bold text-white hover:underline">
                                 Sign Up
                             </button>
                         </div>
@@ -86,19 +82,24 @@ export default function Layout() {
                 </div>
 
                 <nav className="flex space-x-4 text-md">
-                    <Link to="/" className="text-white hover:underline">
-                        Dashboard
-                    </Link>
+                        <Link to="/" className="text-white hover:underline">
+                            Dashboard
+                        </Link>
+                    {isLogged ? ( 
+                        
+                        <Link to="/orders" className="text-white hover:underline">
+                            Orders
+                        </Link>
+                        ) : null 
+                    }
+
                     <Link to="/books" className="text-white hover:underline">
                         Books
-                    </Link>
-                    <Link to="/orders" className="text-white hover:underline">
-                        Orders
                     </Link>
                 </nav>
             </header>
 
-            <div className="flex gap-10 p-2">
+            <div className="flex p-2 ">
                 { location.pathname ==='/books' ? 
                     <SearchAside /> : 
                     null

@@ -1,12 +1,16 @@
+//import { useState } from "react";
+import { maxPagesOfBooks } from "./data/books.js";
 import useApplication from "./hooks/useApplication.jsx";
 export default function SearchAside() {
 
-    const {handleCurrentCategory, categories} = useApplication()
+    //const [ rangePages, setRangePages ] = useState(0)
+    const {handleCurrentCategory, categories, category, pages, setPages, param, setParam} = useApplication()
 
+    const maxPages = maxPagesOfBooks()
 
 
     return (
-        <aside className="w-1/5 p-4 bg-gray-200 rounded-lg shadow-sm h-80">
+        <aside className="w-1/5 p-3 bg-gray-200 rounded-lg shadow-sm h-80">
             <h2 className="mb-4 text-lg font-semibold">Search</h2>
 
             {/* Barra de búsqueda */}
@@ -15,6 +19,8 @@ export default function SearchAside() {
                     type="text"
                     className="w-full px-3 py-2 border rounded-md"
                     placeholder="search books..."
+                    value={param}
+                    onChange={e => setParam(e.target.value)}
                 />
             </div>
 
@@ -23,25 +29,28 @@ export default function SearchAside() {
                 <label className="block text-sm font-medium">Categories</label>
                 <select 
                     className="w-full px-3 py-2 border rounded-md"
+                    value={category}
                     onChange={(e) => handleCurrentCategory(e.target.value)}
+                    
                 >
                     <option value={""}>--Select an option--</option>
                     {categories.map( (categorie, index) => (
                         <option key={index} value={categorie}>{categorie}</option>
                     ) )}
-                    {/* Agrega más opciones de categoría según tus necesidades */}
                 </select>
             </div>
-
-            {/* Filtro por Cantidad de Páginas */}
+            
             <div>
                 <label className="block text-sm font-medium">Number of pages</label>
                 <input
-                    type="number"
-                    min={"1"}
-                    className="w-full px-3 py-2 border rounded-md"
-                    placeholder="Cantidad de páginas..."
+                    type="range"
+                    min={0}
+                    max={maxPages}
+                    className="w-full py-3"
+                    onChange={e => setPages(e.target.value)}
+                    value={pages}
                 />
+                <output className="font-bold text-md">{pages}</output>
             </div>
         </aside>
     );

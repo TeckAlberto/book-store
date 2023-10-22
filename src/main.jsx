@@ -1,5 +1,5 @@
 import React from 'react'
-import { RouterProvider, createBrowserRouter} from "react-router-dom";
+import {RouterProvider, createBrowserRouter} from "react-router-dom";
 import ReactDOM from 'react-dom/client'
 import Layout from "./Layout";
 import './index.css'
@@ -7,6 +7,8 @@ import Books from "./Books.jsx";
 import { ApplicationProvider } from './context/ApplicationProvider';
 import Dashboard from './Dashboard';
 import Orders from './Orders';
+import SignUp from './SignUp';
+import Cart from './Cart';
 
 const router = createBrowserRouter([
     {
@@ -24,11 +26,16 @@ const router = createBrowserRouter([
             {
                 path: "orders",
                 element: <Orders/>
+            },
+            {
+                path: 'cart',
+                element: <Cart/>
             }
         ]
     },
     {
-        path: ""
+        path: "/form",
+        element: <SignUp/>
     }
 ])
 

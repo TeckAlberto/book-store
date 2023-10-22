@@ -1,7 +1,11 @@
 import { useState} from "react";
+import useApplication from "./hooks/useApplication";
 
 export default function Book({ book }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const { handleAddBook, isLogged } = useApplication()
+
+
     const openModal = () => {
         setIsModalOpen(true);
     };
@@ -11,21 +15,29 @@ export default function Book({ book }) {
     };
 
     return (
-        <div className="w-1/3 rounded-md shadow-md md:w-1/5">
+        <div className="relative w-1/4 pb-5 rounded-md shadow-md">
             <img
                 src={book.image}
                 alt={book.title}
-                className="w-full cursor-pointer h-2/3"
+                className="w-full cursor-pointer md:h-2/3"
                 onClick={openModal}
             />
             <div className="px-6 py-4">
-                <div className="mb-2 text-xl font-bold cursor-pointer" onClick={openModal}>
+                <div className="mb-2 text-2xl font-bold cursor-pointer" onClick={openModal}>
                     {book.title}
                 </div>
-                <p className="text-base text-gray-700">{book.author}</p>
-                <button className="px-4 py-2 mt-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-                    Agregar al carrito
-                </button>
+                <p className="mb-2 text-xl text-black">{book.author}</p>
+                <p className="text-xl text-gray-700">${book.price} mxn</p>
+                {isLogged ?
+                    (<button 
+                        className="sticky px-4 py-2 mt-3 text-sm font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+                        onClick={() => handleAddBook(book)}
+                    >
+                        Agregar al carrito
+                    </button>) :
+                    null
+
+                }
             </div>
 
             {/* Modal */}
