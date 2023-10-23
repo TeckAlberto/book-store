@@ -15,7 +15,7 @@ export default function Book({ book }) {
     };
 
     return (
-        <div className="relative w-1/4 pb-5 rounded-md shadow-md">
+        <div className="relative w-1/4 pb-5 rounded-md shadow-md bg-slate-200">
             <img
                 src={book.image}
                 alt={book.title}
