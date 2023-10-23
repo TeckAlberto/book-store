@@ -1,7 +1,7 @@
 import useApplication from "./hooks/useApplication"
 
 export default function Orders() {
-    const { orders } = useApplication()
+    const { orders, getTotalBooks } = useApplication()
     
     return (
         <main>
@@ -11,7 +11,7 @@ export default function Orders() {
                 orders.map( order => (
                     <section className="p-3 mb-5 ml-5 space-y-5 bg-white shadow-xl rounded-xl" key={order.id}>
                         
-                        <p className="text-xl font-bold">Total de productos: <span className="font-normal">{order.books.length} libros</span></p>
+                        <p className="text-xl font-bold">Total de productos: <span className="font-normal">{getTotalBooks(order.books)} libros</span></p>
                         <p className="text-xl font-bold">Cuenta total: <span className="font-normal">${order.total} mxn</span></p>
 
 

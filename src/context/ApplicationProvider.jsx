@@ -69,6 +69,17 @@ const ApplicationProvider = ({children}) => {
         return 0
     }
 
+
+    const getTotalBooks = books => {
+        let totalBooks = 0
+
+        books.forEach ( book => {
+            totalBooks += book.count
+        })
+
+        return totalBooks
+    }
+
     const refreshBooks = () => {
         // Filtrar libros iniciales si no se aplican filtros
         if (category === '' && param === '' && pages === 0) {
@@ -121,7 +132,8 @@ const ApplicationProvider = ({children}) => {
                 handleGetOrder,
                 handleDeleteBook,
                 orders,
-                setOrders
+                setOrders,
+                getTotalBooks
             }}
         >
             {children}
